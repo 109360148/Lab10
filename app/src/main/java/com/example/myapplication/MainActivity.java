@@ -71,35 +71,34 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     @Override
-    public void onMapReady(GoogleMap map){
-        if (ActivityCompat.checkSelfPermission(MainActivity.this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION) !=
+    public void onMapReady(@NonNull GoogleMap googleMap){
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(MainActivity.this,
-                        android.Manifest.permission.ACCESS_COARSE_LOCATION) !=
+                ActivityCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION) !=
                         PackageManager.PERMISSION_GRANTED)
             return;
-        map.setMyLocationEnabled(true);
-        MarkerOptions m1 = new MarkerOptions();
-        m1.position(new LatLng(25.033611, 121.565000));
-        m1.title("台北101");
-        m1.draggable(true);
-        map.addMarker(m1);
+        googleMap.setMyLocationEnabled(true);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(new LatLng(25.033611, 121.565000));
+        markerOptions.title("台北101");
+        markerOptions.draggable(true);
+        googleMap.addMarker(markerOptions);
+        markerOptions.position(new LatLng(25.047924, 121.517081));
+        markerOptions.title("台北車站");
+        markerOptions.draggable(true);
+        googleMap.addMarker(markerOptions);
 
-        MarkerOptions m2 = new MarkerOptions();
-        m2.position(new LatLng(25.047924, 121.517081));
-        m1.title("台北車站");
-        m1.draggable(true);
-        map.addMarker(m2);
-
-        PolylineOptions polylineOpt = new PolylineOptions();
-        polylineOpt.add(new LatLng(25.033611,121.565000));
-        polylineOpt.add(new LatLng(25.032728,21.5651377));
-        polylineOpt.add(new LatLng(25.047924,121.517081));
-        polylineOpt.color(Color.BLUE);
-        Polyline polyline = map.addPolyline(polylineOpt);
+        PolylineOptions polylineOptions = new PolylineOptions();
+        polylineOptions.add(new LatLng(25.033611,121.565000));
+        polylineOptions.add(new LatLng(25.032728,21.5651377));
+        polylineOptions.add(new LatLng(25.047924,121.517081));
+        polylineOptions.color(Color.BLUE);
+        Polyline polyline = googleMap.addPolyline(polylineOptions);
         polyline.setWidth(10);
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(
+        googleMap.moveCamera(
+                CameraUpdateFactory.newLatLngZoom(
                 new LatLng(25.034,121.545),13));
     }
 }
